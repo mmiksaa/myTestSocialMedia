@@ -73,11 +73,29 @@ body {
   max-height: 40px;
 }
 
-.form__btn {
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
+.settings {
+  display: none;
 }
+
+.form__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+
+.form__nickname {
+  color: #778164;
+  cursor: pointer;
+  transition: 0.3s color;
+}
+
+.form__nickname:hover {
+  color: #9c001a;
+}
+
+/* .form__btn { */
+/* } */
 
 .btn:hover {
   color: #1d1d1d;
@@ -100,6 +118,7 @@ body {
   background-color: #1d1d1d;
   display: block;
   margin: 0 auto;
+  text-align: center;
 }
 
 .popup__title {
@@ -174,6 +193,16 @@ body {
   background-color: #121212;
 }
 
+.news__header-wrapp {
+  display: flex;
+  align-items: center;
+  color: #ccc;
+}
+
+.news__name {
+  margin-left: 10px;
+}
+
 .news__title {
   font-size: 20px;
   color: #FF005F;
@@ -220,7 +249,7 @@ body {
     width: calc(100% - 20px);
   }
 
-  .register-form {
+  .popup__form {
     width: 100%;
   }
 

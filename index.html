@@ -25,7 +25,10 @@
           <div class="form">
             <form class="send-new-form">
               <textarea class="form__textarea" name="text" placeholder="type here..."></textarea>
-              <button class="btn form__btn">send</button>
+              <div class="form__bottom">
+                <span class="form__nickname">change nick</span>
+                <button class="btn form__btn">send</button>
+              </div>
             </form>
           </div>
 
@@ -35,11 +38,19 @@
       </div>
     </div>
 
-    <div class="popup">
-      <form class="register-form">
-        <p class="popup__title">войди уцы</p>
+    <div class="popup login">
+      <form class="popup__form login__form">
+        <p class="popup__title login__title">войди уцы</p>
         <input class="popup__input" type="text" name="pass">
-        <button class="btn popup__btn">войти</button>
+        <button class="btn popup__btn login__btn">войти</button>
+      </form>
+    </div>
+
+    <div class="popup settings">
+      <form class="popup__form settings__form">
+        <p class="popup__title settings__title">сменить ник</p>
+        <input class="popup__input settings__input" type="text" name="pass">
+        <button class="btn popup__btn">готово</button>
       </form>
     </div>
 

@@ -1,0 +1,24 @@
+{
+  "news": [
+    {
+      "text": "sssssssssssss",
+      "id": 0.9140242565173207,
+      "date": "2022 4 15",
+      "name": "mikail"
+    }
+  ],
+  "login": [
+    {
+      "name": "islam",
+      "pass": "islam_luchshii"
+    },
+    {
+      "name": "shoma",
+      "pass": "islam_hudshi"
+    },
+    {
+      "name": "isma",
+      "pass": "islam_yebok"
+    }
+  ]
+}

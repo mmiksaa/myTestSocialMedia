@@ -2,6 +2,7 @@
 
 const news = document.querySelector('.news');
 const form = document.querySelector('.send-new-form');
+const inputSend = document.querySelector('.form__textarea');
 const formReg = document.querySelector('.register-form');
 const popup = document.querySelector('.popup');
 const popupTitle = document.querySelector('.popup__title');
@@ -45,9 +46,6 @@ if(!yourName) {
     data.forEach(function (value, key) {
       object[key] = value;
     });
-
-
-    // request(`https://zxsas-46ecd-default-rtdb.firebaseio.com/login.json`, 'POST', JSON.stringify(object))
 
     request(`https://zxsas-46ecd-default-rtdb.firebaseio.com/login.json`)
       .then(res => {
@@ -124,6 +122,7 @@ form.addEventListener('submit', (e) => {
 
   request('https://zxsas-46ecd-default-rtdb.firebaseio.com/news.json', 'POST', JSON.stringify(object))
     .then(res => {
+      inputSend.value = '';
       const element = document.createElement('li');
       element.innerHTML = `
         <li>

@@ -47,10 +47,13 @@ if(!yourName) {
       object[key] = value;
     });
 
+    object.name = 'shuana'
+
+
+    // request(`https://zxsas-46ecd-default-rtdb.firebaseio.com/login.json`, 'POST', JSON.stringify(object))
+
     request(`https://zxsas-46ecd-default-rtdb.firebaseio.com/login.json`)
       .then(res => {
-
-
         Object.values(res).some(({
           pass,
           name
@@ -122,7 +125,7 @@ form.addEventListener('submit', (e) => {
 
   request('https://zxsas-46ecd-default-rtdb.firebaseio.com/news.json', 'POST', JSON.stringify(object))
     .then(res => {
-      inputSend.value = '';
+      inputSend.value = ``;
       const element = document.createElement('li');
       element.innerHTML = `
         <li>

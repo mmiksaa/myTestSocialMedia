@@ -6,8 +6,11 @@ const formReg = document.querySelector('.register-form');
 const popup = document.querySelector('.popup');
 const popupTitle = document.querySelector('.popup__title');
 const wrapp = document.querySelector('.wrapp')
+const btnLeave = document.querySelector('.btn-leave');
 
-let yourName = '';
+let yourName = localStorage.getItem('login') || '';
+
+// let login = false || localStorage('getItem');
 
 const request = (async (url, method = 'GET', body = null, headers = {
   'Content-Type': 'application/json'
@@ -32,43 +35,59 @@ const request = (async (url, method = 'GET', body = null, headers = {
   }
 });
 
-formReg.addEventListener('submit', (e) => {
-  e.preventDefault();
+if(!yourName) {
+  formReg.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-  const data = new FormData(formReg);
+    const data = new FormData(formReg);
 
-  const object = {};
-  data.forEach(function (value, key) {
-    object[key] = value;
-  });
-  
+    const object = {};
+    data.forEach(function (value, key) {
+      object[key] = value;
+    });
 
-  // request(`https://zxsas-46ecd-default-rtdb.firebaseio.com/login.json`, 'POST', JSON.stringify(object))
 
-  request(`https://zxsas-46ecd-default-rtdb.firebaseio.com/login.json`)
-  .then(res => {
+    // request(`https://zxsas-46ecd-default-rtdb.firebaseio.com/login.json`, 'POST', JSON.stringify(object))
 
-    
-    Object.values(res).some(({pass, name}) => {
-      if (object.pass === pass) { object.name = name; }
-    }); 
+    request(`https://zxsas-46ecd-default-rtdb.firebaseio.com/login.json`)
+      .then(res => {
 
-    if(object.name) {
-      renderItems();
-      popup.style.display = 'none';
-      wrapp.classList.remove('wrapp-m');
-      yourName = Object.values(res)[0].name;
-    } else {
-      popupTitle.textContent = 'мику не обведешь(пароль не верный)'
-    }
+
+        Object.values(res).some(({
+          pass,
+          name
+        }) => {
+          if (object.pass === pass) {
+            object.name = name;
+          }
+        });
+
+
+        if (object.name) {
+          renderItems();
+          popup.style.display = 'none';
+          wrapp.classList.remove('wrapp-m');
+          yourName = object.name;
+          localStorage.setItem('login', yourName);
+        } else {
+          popupTitle.textContent = 'мику не обведешь(пароль не верный)'
+        }
+
+      })
+      .catch(err => popupTitle.textContent = 'произошла ошибка, обнови страницу')
   })
-  .catch(err => popupTitle.textContent = 'произошла ошибка, обнови страницу')
-})
+}else {
+  renderItems();
+  popup.style.display = 'none';
+  wrapp.classList.remove('wrapp-m');
+}
+
 
 function renderItems () {
   request('https://zxsas-46ecd-default-rtdb.firebaseio.com/news.json')
   .then(res => {
     Object.values(res).forEach(({name, text, date}) => {
+
       const element = document.createElement('li');
       element.innerHTML = `
       <li>
@@ -103,8 +122,6 @@ form.addEventListener('submit', (e) => {
   object.date = date;
   object.name = yourName;
 
-  console.log(JSON.stringify(object));
-
   request('https://zxsas-46ecd-default-rtdb.firebaseio.com/news.json', 'POST', JSON.stringify(object))
     .then(res => {
       const element = document.createElement('li');
@@ -123,5 +140,7 @@ form.addEventListener('submit', (e) => {
     })
 })
 
-
-
+btnLeave.addEventListener('click', () => {
+  localStorage.removeItem('login');
+  location.reload();
+});
